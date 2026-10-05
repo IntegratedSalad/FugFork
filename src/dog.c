@@ -90,14 +90,15 @@ initedog(struct monst *mtmp, boolean everything)
 staticfn int
 pet_type(void)
 {
-    if (gu.urole.petnum != NON_PM)
-        return  gu.urole.petnum;
-    else if (gp.preferred_pet == 'c')
-        return  PM_KITTEN;
-    else if (gp.preferred_pet == 'd')
-        return  PM_LITTLE_DOG;
-    else
-        return  rn2(2) ? PM_KITTEN : PM_LITTLE_DOG;
+    return PM_SPURDO_SPARDE;
+    // if (gu.urole.petnum != NON_PM)
+    //     return  gu.urole.petnum;
+    // else if (gp.preferred_pet == 'c')
+    //     return  PM_KITTEN;
+    // else if (gp.preferred_pet == 'd')
+    //     return  PM_LITTLE_DOG;
+    // else
+    //     return  rn2(2) ? PM_KITTEN : PM_LITTLE_DOG;
 }
 
 staticfn struct permonst *
@@ -215,6 +216,7 @@ make_familiar(struct obj *otmp, coordxy x, coordxy y, boolean quietly)
 }
 
 /* despite rather general name, used exclusively for hero's starting pet */
+// HERE WE CAN CREATE SPURDO SPARDE
 struct monst *
 makedog(void)
 {
@@ -232,7 +234,8 @@ makedog(void)
     petname = (pettype == PM_LITTLE_DOG) ? gd.dogname
               : (pettype == PM_KITTEN) ? gc.catname
                 : (pettype == PM_PONY) ? gh.horsename
-                  : "";
+                  : (pettype == PM_SPURDO_SPARDE) ? "Spurdo :D"
+                    : "";
 
     /* default pet names */
     if (!*petname && pettype == PM_LITTLE_DOG) {

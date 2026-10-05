@@ -284,15 +284,15 @@ dog_eat(struct monst *mtmp,
                result won't be printed */
             obj_name = distant_name(obj, doname);
             if (tunnels(mtmp->data))
-                pline_mon(mtmp, "%s digs in.", noit_Monnam(mtmp));
+                pline_mon(mtmp, "%s munches XDDD.", noit_Monnam(mtmp));
             else
                 pline_mon(mtmp, "%s %s %s.",
                           devour ? noit_or_your_Monnam(mtmp)
                                  : noit_Monnam(mtmp),
-                          devour ? "devours" : "eats", obj_name);
+                          devour ? "fugging goblebes" : "eads", obj_name);
         } else if (seeobj) {
             obj_name = distant_name(obj, doname);
-            pline("It %s %s.", devour ? "devours" : "eats", obj_name);
+            pline("It %s %s.", devour ? "deboures" : "eads", obj_name);
         }
     }
     if (obj->unpaid) {
@@ -308,7 +308,7 @@ dog_eat(struct monst *mtmp,
         if (canseemon(mtmp)) {
             obj_name = distant_name(obj, doname); /* (see above) */
             if (flags.verbose)
-                pline("%s spits %s out in disgust!",
+                pline("%s sbits %s out in disbusd D:<",
                       Monnam(mtmp), obj_name);
         }
     } else {
@@ -335,7 +335,7 @@ dog_eat(struct monst *mtmp,
             /* edible item owned by shop has been thrown or kicked
                by hero and caught by tame or food-tameable monst */
             oprice = unpaid_cost(obj, COST_CONTENTS);
-            pline("That %s will cost you %ld %s.", objnambuf, oprice,
+            pline("Ey fugging %s is bricey!! %ld %s.", objnambuf, oprice,
                   currency(oprice));
             /* m_consume_obj() -> delobj() -> obfree() will handle the shop
                billing update */
@@ -350,12 +350,12 @@ staticfn void
 dog_starve(struct monst *mtmp)
 {
     if (mtmp->mleashed && mtmp != u.usteed)
-        Your("leash goes slack.");
+        Your("leash gobes slag.");
     else if (cansee(mtmp->mx, mtmp->my))
-        pline_mon(mtmp, "%s starves.", Monnam(mtmp));
+        pline_mon(mtmp, "%s starbes. XD", Monnam(mtmp));
     else
-        You_feel("%s for a moment.",
-                    Hallucination ? "bummed" : "sad");
+        You_feel("%s for a momend XD",
+                    Hallucination ? "FUGGING SHIDE XDDDDD" : "glorpshid D:<");
     mondied(mtmp);
 }
 
@@ -380,11 +380,11 @@ dog_hunger(struct monst *mtmp, struct edog *edog)
                 return TRUE;
             }
             if (cansee(mtmp->mx, mtmp->my))
-                pline_mon(mtmp, "%s is confused from hunger.", Monnam(mtmp));
+                pline_mon(mtmp, "%s is gonfused from no munchies.", Monnam(mtmp));
             else if (couldsee(mtmp->mx, mtmp->my))
                 beg(mtmp);
             else
-                You_feel("worried about %s.", y_monnam(mtmp));
+                You_feel("lige ordering a larbe bizza for %s.", y_monnam(mtmp));
             stop_occupation();
         } else if (svm.moves > edog->hungrytime + DOG_STARVE
                    || DEADMONSTER(mtmp)) {
@@ -459,7 +459,7 @@ dog_invent(struct monst *mtmp, struct edog *edog, int udist)
                             char *otmpname = distant_name(otmp, doname);
 
                             if (flags.verbose)
-                                pline_xy(omx, omy, "%s picks up %s.",
+                                pline_xy(omx, omy, "%s bigs ub :D %s.",
                                       Monnam(mtmp), otmpname);
                         }
                         obj_extract_self(otmp);

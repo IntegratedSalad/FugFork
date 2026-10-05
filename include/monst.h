@@ -100,6 +100,9 @@ enum m_seen_resistance {
 #define monstunseesu_ad(adtyp) monstunseesu(cvt_adtyp_to_mseenres(adtyp))
 #define monstunseesu_prop(prop) monstunseesu(cvt_prop_to_mseenres(prop))
 
+// This is the monster that is actually living in the dungeon.
+// Data within this structure can change.
+// It has a pointer to the permonst structure.
 struct monst {
     struct monst *nmon;
     struct permonst *data;
