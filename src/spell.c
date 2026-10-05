@@ -1498,6 +1498,9 @@ spelleffects(int spell_otyp, boolean atme, boolean force)
                 pline_The("magical energy is released!");
             }
             if (!u.dx && !u.dy && !u.dz) {
+
+                // SPURDO COMMENT:
+                // Player casting spell at themselves.
                 if ((damage = zapyourself(pseudo, TRUE)) != 0) {
                     char buf[BUFSZ];
 

@@ -770,7 +770,7 @@ init_sound_disp_gamewindows(void)
 }
 
 void
-newgame(void)
+newgame(void) // SPURDO COMMENT: NEWGAME
 {
     int i;
 

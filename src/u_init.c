@@ -172,6 +172,7 @@ static const struct trobj Wizard[] = {
     { UNDEF_TYP, UNDEF_SPE, POTION_CLASS, 3, 3, UNDEF_BLESS },
     { UNDEF_TYP, UNDEF_SPE, SCROLL_CLASS, 3, 3, UNDEF_BLESS },
     { SPE_FORCE_BOLT, 0, SPBOOK_CLASS, 1, 1, 1 },
+    { SPE_SLEEP, 0, SPBOOK_CLASS, 1, 1, 1},
     { UNDEF_TYP, UNDEF_SPE, SPBOOK_CLASS, 1, 1, UNDEF_BLESS },
     { MAGIC_MARKER, 19, TOOL_CLASS, 1, 1, 0 }, /* actually spe = 18 + d4 */
     { 0, 0, 0, 0, 0, 0 }
@@ -634,7 +635,7 @@ knows_class(char sym)
    once, so any non-inventory initialisations should be nonrandom and
    idempotent (i.e. doing them twice is OK) */
 staticfn void
-u_init_role(void)
+u_init_role(void) // SPURDO COMMENT INVENTORY FOR ROLES
 {
     int i;
 

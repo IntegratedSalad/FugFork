@@ -24,6 +24,7 @@ static struct _mcast_data mcast_data[] = {
 
 /* spell lists for specific monster casters */
 /* the spells in the list should be in ascending level order */
+// SPURDO COMMENT: This is then iterated on in choose_monster_spell
 static int mon_cleric_spells[] = {
     MCAST_OPEN_WOUNDS, MCAST_CURE_SELF, MCAST_CONFUSE_YOU, MCAST_PARALYZE,
     MCAST_BLIND_YOU, MCAST_INSECTS, MCAST_CURSE_ITEMS, MCAST_LIGHTNING,
@@ -211,6 +212,9 @@ castmu(
             set_msg_xy(mtmp->mx, mtmp->my);
             pline_The("air crackles around %s.", mon_nam(mtmp));
         }
+        // SPURDO COMMENT -> game thinks that spurdo (pet) targeted the player.
+        // This is a BUG, because spells are not targeted at player!
+        // This is not a fumbled attack!
         return M_ATTK_MISS;
     }
     if (canspotmon(mtmp) || !is_undirected_spell(spellnum)) {

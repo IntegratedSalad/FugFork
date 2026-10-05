@@ -1049,7 +1049,7 @@
         9, CLR_BROWN, WARHORSE),
     MON(NAM("Spurdo Sparde"), S_HUMANOID,
         LVL(12, 20, -7, 50, 0), (G_GENO | G_NOGEN),
-        A(ATTK(AT_KICK, AD_PHYS, 3, 10), ATTK(AT_BITE, AD_PHYS, 3, 6),
+        A(ATTK(AT_KICK, AD_PHYS, 3, 10), ATTK(AT_WEAP, AD_PHYS, 2, 8),
           ATTK(AT_MAGC, AD_SLOW, 0, 0),
           ATTK(AT_MAGC, AD_SPEL, 0, 0),
           NO_ATTK, NO_ATTK),

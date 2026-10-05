@@ -563,6 +563,10 @@ mattackm(
             }
             break;
 
+        case AT_MAGC: // SPURDO COMMENT: It seems that monsters cannot fight monsters by magical means...
+            // no castmm?
+            pline("%s attempts to attack by magical means, but cannot!", Monnam(magr));
+            break;
         default: /* no attack */
             strike = 0;
             attk = 0;
@@ -696,7 +700,12 @@ hitmm(
                 FALLTHROUGH;
                 /*FALLTHRU*/
             default:
-                if (!weaponhit || !mwep || !mwep->oartifact)
+                if (magr->mtame && !magr->isminion) // is pet
+                    // if pet is spurdo sparde
+                    // TODO: add special flag IS_FUG to permonst
+                    // if (magr->)
+                    Snprintf(buf, sizeof buf, "%s fugging bashes :DD", magr_name);
+                else if (!weaponhit || !mwep || !mwep->oartifact)
                     Snprintf(buf, sizeof buf, "%s hits", magr_name);
                 break;
             }

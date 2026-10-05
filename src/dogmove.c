@@ -968,6 +968,9 @@ pet_ranged_attk(struct monst *mtmp, boolean forced)
     return MMOVE_NOTHING;
 }
 
+// SPURDO COMMENT:
+// Maybe int pet_magical_attack?
+
 /* Return values (same as m_move):
  * 0: did not move, but can still attack and do other stuff.
  * 1: moved, possibly can attack.

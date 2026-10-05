@@ -1770,7 +1770,7 @@ m_move(struct monst *mtmp, int after)
     /* doorbuster = is_giant(ptr); */
     if (mtmp->wormno)
         goto not_special;
-    /* my dog gets special treatment */
+    /* my dog gets special treatment */ // SPURDO COMMENT -> PET MOVES HERE
     if (mtmp->mtame) {
         return postmov(mtmp, ptr, omx, omy, dog_move(mtmp, after),
                        seenflgs, can_tunnel, can_unlock, can_open);
@@ -2075,6 +2075,8 @@ m_move(struct monst *mtmp, int after)
     return postmov(mtmp, ptr, omx, omy, mmoved,
                    seenflgs, can_tunnel, can_unlock, can_open);
 }
+
+// SPURDO COMMENT: MONSTER ATTACKS MONSTER HERE
 
 /* The part of m_move that deals with a monster attacking another monster (and
  * that monster possibly retaliating).
