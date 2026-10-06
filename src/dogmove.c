@@ -479,6 +479,8 @@ dog_invent(struct monst *mtmp, struct edog *edog, int udist)
     return 0;
 }
 
+/* SPURDO COMMENT */
+// Here is the function that sets next pet goal.
 /* set dog's goal -- gtyp, gx, gy;
    returns -1/0/1 (dog's desire to approach player) or -2 (abort move) */
 staticfn int
@@ -736,6 +738,9 @@ find_friends(struct monst *mtmp, struct monst *mtarg, int maxdist)
     return 0;
 }
 
+/* SPURDO COMMENT */
+
+// Here is the function that scores the possible targets for pet
 staticfn long
 score_targ(struct monst *mtmp, struct monst *mtarg)
 {
@@ -818,10 +823,13 @@ score_targ(struct monst *mtmp, struct monst *mtarg)
             if (mtmp->m_lev > mtmp_lev)
                 mtmp_lev = mtmp->m_lev;
         }
-        /* And pets will hesitate to attack vastly stronger foes.
+        // SPURDO COMMENT
+        // Here we can make the pet braver.
+        // TODO: Also make pet shout something when the monster level is vastly higher than pet's.
+        /* And pets will hesitate to attack vastly stronger foes. <- not true here.
            This penalty will be discarded if master's in trouble. */
-        if (mtarg->m_lev > mtmp_lev + 4L)
-            score -= (mtarg->m_lev - mtmp_lev) * 20L;
+        if (mtarg->m_lev > mtmp_lev + 7L)
+            score -= (mtarg->m_lev - mtmp_lev) * 10L;
         /* All things being the same, go for the beefiest monster. This
            bonus should not be large enough to override the pet's aversion
            to attacking much stronger monsters. */
@@ -836,6 +844,9 @@ score_targ(struct monst *mtmp, struct monst *mtarg)
     return score;
 }
 
+/* SPURDO COMMENT */
+
+// Find best target for a pet
 staticfn struct monst *
 best_target(struct monst *mtmp, boolean forced)   /* Pet */
 {
@@ -1104,6 +1115,7 @@ dog_move(
 
         ranged_only = FALSE;
 
+
         if ((mfp.info[i] & ALLOW_M) && MON_AT(nx, ny)) {
             int mstatus;
             struct monst *mtmp2 = m_at(nx, ny);
@@ -1120,10 +1132,14 @@ dog_move(
              * note that balk's maximum value is +3, as it is the lowest level
              * the pet will balk at attacking rather than the highest level
              * they are willing to attack; note the >= used when comparing it.
+             * Below we are adding +20 to this value, so pet will now attack
+             * a dragon at pet's starting level.
              */
             int balk = mtmp->m_lev + ((5 * mtmp->mhp) / mtmp->mhpmax) - 2;
 
-            if ((int) mtmp2->m_lev >= balk
+            // SPURDO COMMENT: I think we are not entering mattackm below!
+            // Let's try adding 20 levels, so the Spurdo is braver!
+            if ((int) mtmp2->m_lev >= balk + 20
                 || (mtmp2->mtame && mtmp->mtame && !Conflict)
                 || (max_passive_dmg(mtmp2, mtmp) >= mtmp->mhp)
                 || ((mtmp->mhp * 4 < mtmp->mhpmax

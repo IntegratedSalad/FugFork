@@ -562,7 +562,6 @@ mattackm(
                 attk = 0;
             }
             break;
-
         case AT_MAGC: // SPURDO COMMENT: It seems that monsters cannot fight monsters by magical means...
             // no castmm?
             pline("%s attempts to attack by magical means, but cannot!", Monnam(magr));

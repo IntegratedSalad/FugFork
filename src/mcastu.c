@@ -212,9 +212,6 @@ castmu(
             set_msg_xy(mtmp->mx, mtmp->my);
             pline_The("air crackles around %s.", mon_nam(mtmp));
         }
-        // SPURDO COMMENT -> game thinks that spurdo (pet) targeted the player.
-        // This is a BUG, because spells are not targeted at player!
-        // This is not a fumbled attack!
         return M_ATTK_MISS;
     }
     if (canspotmon(mtmp) || !is_undirected_spell(spellnum)) {
