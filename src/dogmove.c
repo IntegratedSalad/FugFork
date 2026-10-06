@@ -1169,6 +1169,38 @@ dog_move(
 
             gb.bhitpos.x = nx, gb.bhitpos.y = ny;
             gn.notonhead = mtmp2->mx != nx || mtmp2->my != ny;
+            if (mtmp2->m_lev > mtmp->m_lev)
+            {
+                if (canseemon(mtmp))
+                {
+#define SGREAM_BUF 50
+#define RN_SGRMS   3
+                    char sbuf[SGREAM_BUF];
+                    const int rnsgr = rn2(RN_SGRMS);
+                    switch (rnsgr)
+                    {
+                        case 0:
+                        {
+                            copynchars(sbuf, "DYYYR GUIDE US DO BADDLE XDD :-DDD", (int) sizeof(sbuf) - 1);
+                            break;
+                        }
+                        case 1:
+                        {
+                            copynchars(sbuf, "AOAOAAOAOAO :DD XDDDDDDD", (int) sizeof(sbuf) - 1);
+                            break;
+                        }
+                        case 2:
+                        {
+                            copynchars(sbuf, "FUG DA SYSDEM XDD :-----D", (int) sizeof(sbuf) - 1);
+                            break;
+                        }
+                    }
+                    You_hear("%s sgreaming: %s", Monnam(mtmp), sbuf);
+                } else
+                {
+                    You_hear("very loud and incoherent shouting and banging.");
+                }
+            }
             mstatus = mattackm(mtmp, mtmp2);
 
             /* aggressor (pet) died */
