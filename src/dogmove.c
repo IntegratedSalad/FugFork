@@ -45,7 +45,7 @@ droppables(struct monst *mon)
     dummy.otyp = GOLD_PIECE; /* not STRANGE_OBJECT or tools of interest */
     dummy.oartifact = 1; /* so real artifact won't override "don't keep it" */
     pickaxe = unihorn = key = (struct obj *) 0;
-    wep = MON_WEP(mon);
+    wep = MON_WEP(mon); // BUG: this is null. Or it is intended? maybe we shouldn't really have anything here, because spurdo starts with the weapon unwielded
 
     if (is_animal(mon->data) || mindless(mon->data)) {
         /* won't hang on to any objects of these types */
@@ -64,6 +64,8 @@ droppables(struct monst *mon)
         if (wep->otyp == UNICORN_HORN)
             unihorn = wep;
         /* don't need any wielded check for keys... */
+    } else {
+
     }
 
     for (obj = mon->minvent; obj; obj = obj->nobj) {
@@ -395,6 +397,14 @@ dog_hunger(struct monst *mtmp, struct edog *edog)
     return FALSE;
 }
 
+// SPURDO COMMENT
+// ok, here we decide to do something with an object at dog x,y.
+// if it has something that droppable (not needed), then we drop it.
+// if not, we check if something at x,y is worth to pickup.
+// if it is a weapon, and monster needs HTH (hand-to-hand) weapon,
+// we wield it.
+// where is the check if something is better weapon, then
+// pet might pick it up?
 /* do something with object (drop, pick up, eat) at current position
  * returns 1 if object eaten (since that counts as dog's move), 2 if died
  */
@@ -824,8 +834,7 @@ score_targ(struct monst *mtmp, struct monst *mtarg)
                 mtmp_lev = mtmp->m_lev;
         }
         // SPURDO COMMENT
-        // Here we can make the pet braver.
-        // TODO: Also make pet shout something when the monster level is vastly higher than pet's.
+        // Here we can make the pet braver - he will now target monsters above his level.
         /* And pets will hesitate to attack vastly stronger foes. <- not true here.
            This penalty will be discarded if master's in trouble. */
         if (mtarg->m_lev > mtmp_lev + 7L)

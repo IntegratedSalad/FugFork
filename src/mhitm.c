@@ -691,6 +691,17 @@ hitmm(
                 Snprintf(buf, sizeof buf, "%s tentacles suck",
                          s_suffix(magr_name));
                 break;
+            case AT_WEAP:
+            {
+                if (magr->data == &mons[PM_SPURDO_SPARDE] && magr->mtame && !magr->isminion)
+                {
+                    if (mwep->otyp == CLUB)
+                        Snprintf(buf, sizeof buf, "%s fugging bashes :DD XD", magr_name);
+                    else if (mwep->otyp == BATTLE_AXE)
+                        Snprintf(buf, sizeof buf, "%s fugging gleabes :DDDDD", magr_name);
+                }
+                break;
+            }
             case AT_HUGS:
                 if (magr != u.ustuck) {
                     Snprintf(buf, sizeof buf, "%s squeezes", magr_name);
@@ -699,12 +710,7 @@ hitmm(
                 FALLTHROUGH;
                 /*FALLTHRU*/
             default:
-                if (magr->mtame && !magr->isminion) // is pet
-                    // if pet is spurdo sparde
-                    // TODO: add special flag IS_FUG to permonst
-                    // if (magr->)
-                    Snprintf(buf, sizeof buf, "%s fugging bashes :DD", magr_name);
-                else if (!weaponhit || !mwep || !mwep->oartifact)
+                if (!weaponhit || !mwep || !mwep->oartifact)
                     Snprintf(buf, sizeof buf, "%s hits", magr_name);
                 break;
             }

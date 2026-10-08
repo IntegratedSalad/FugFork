@@ -700,6 +700,9 @@ static const NEARDATA short hwep[] = {
     SCALPEL, KNIFE, WORM_TOOTH
 };
 
+// SPURDO COMMENT:
+// Here is the function that selects weapon for monster
+// FROM HIS INVENTORY.
 /* select a hand to hand weapon for the monster */
 struct obj *
 select_hwep(struct monst *mtmp)
@@ -742,6 +745,9 @@ select_hwep(struct monst *mtmp)
 
 /* Called after polymorphing a monster, robbing it, etc....  Monsters
  * otherwise never unwield stuff on their own.  Might print message.
+ * SPURDO COMMENT:
+ * TODO: Spurdo might drop a weapon and equip another, if it sees, that
+ * weapon on ground/on sight is better.
  */
 void
 possibly_unwield(struct monst *mon, boolean polyspot)
@@ -794,6 +800,9 @@ possibly_unwield(struct monst *mon, boolean polyspot)
     return;
 }
 
+// SPURDO COMMENT
+// Here's the function that checks if monster needs weapon
+// and then calls select_hwep.
 /* Let a monster try to wield a weapon, based on mon->weapon_check.
  * Returns 1 if the monster took time to do it, 0 if it did not.
  */

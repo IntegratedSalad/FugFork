@@ -207,6 +207,7 @@ make_familiar(struct obj *otmp, coordxy x, coordxy y, boolean quietly)
     set_malign(mtmp); /* more alignment changes */
     newsym(mtmp->mx, mtmp->my);
 
+    // SPURDO COMMENT. Does Spurdo wield club at the beginning?
     /* must wield weapon immediately since pets will otherwise drop it */
     if (mtmp->mtame && attacktype(mtmp->data, AT_WEAP)) {
         mtmp->weapon_check = NEED_HTH_WEAPON;
@@ -250,13 +251,16 @@ makedog(void)
             petname = "Sirius"; /* Orion's dog */
     }
 
+    // SPURDO COOMMENT:
+    // TODO: Maybe we need to modify this?
+    // Does spurdo start with club?
+    // We have to remove NO_MINVENT flag from makemon here.
     /* specifying NO_MINVENT prevents makemon() from having a 1% chance
        of creating a pony with an already worn saddle; dogs and cats
        aren't affected because they don't have any initial inventory
        [if anybody adds stranger pets that are expected to have such,
        they'll need to modify this] */
-    mtmp = makemon(&mons[pettype], u.ux, u.uy, MM_EDOG | NO_MINVENT);
-
+    mtmp = makemon(&mons[pettype], u.ux, u.uy, MM_EDOG);
     if (!mtmp)
         return ((struct monst *) 0); /* pets were genocided [how?] */
 
@@ -283,6 +287,13 @@ makedog(void)
         mtmp = christen_monst(mtmp, petname);
 
     initedog(mtmp, TRUE);
+
+    // When making the dog (spurdo sparde), we need it to wield
+    // its weapon given at creation (m_initweap, called by makemon).
+    if (mtmp->mtame && attacktype(mtmp->data, AT_WEAP)) {
+        mtmp->weapon_check = NEED_HTH_WEAPON;
+        (void) mon_wield_item(mtmp);
+    }
     return  mtmp;
 }
 

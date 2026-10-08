@@ -157,6 +157,8 @@ m_initthrow(struct monst *mtmp, int otyp, int oquan)
     (void) mpickobj(mtmp, otmp);
 }
 
+// SPURDO COMMENT:
+// Here monsters get weapons.
 staticfn void
 m_initweap(struct monst *mtmp)
 {
@@ -397,6 +399,11 @@ m_initweap(struct monst *mtmp)
             } else {
                 (void) mongets(mtmp, !rn2(3) ? PICK_AXE : DAGGER);
             }
+        } else if (mm == PM_SPURDO_SPARDE) {
+            // SPURDO COMMENT TODO: Here, init spurdo with a club.
+            // RARE: spurdo can receive battle axe
+            // TODO: if spurdo has club, print "BAM :D XD"
+            (void) mongets(mtmp, ( !(rn2(20)) ? BATTLE_AXE : CLUB ));
         }
         break;
     case S_KOP:
